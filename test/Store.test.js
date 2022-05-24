@@ -9,10 +9,10 @@ describe('store/github_commits', () => {
   let store
 
   beforeAll(() => {
-    store = new Vuex.Store({state, getters, mutations, actions})
+    store = new Vuex.Store({ state, getters, mutations, actions })
   })
 
-  describe("commits", () => {
+  describe('commits', () => {
     let commits
 
     beforeAll(async () => {
@@ -23,11 +23,11 @@ describe('store/github_commits', () => {
       commits = store.getters.commits
     })
 
-    test("commits is an array", () => {
+    test('commits is an array', () => {
       expect(Array.isArray(commits)).toBe(true)
     })
 
-    test("commits is greater than 0", () => {
+    test('commits is greater than 0', () => {
       expect(commits.length).toBeGreaterThan(0)
     })
   })
