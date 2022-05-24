@@ -8,7 +8,7 @@ localVue.use(Vuex)
 describe('store/github_commits', () => {
   let store
 
-  beforeAll(async () => {
+  beforeAll(() => {
     store = new Vuex.Store({state, getters, mutations, actions})
   })
 
@@ -20,7 +20,7 @@ describe('store/github_commits', () => {
     })
 
     beforeEach(() => {
-      commits = store.getters['commits']
+      commits = store.getters.commits
     })
 
     test("commits is an array", () => {
