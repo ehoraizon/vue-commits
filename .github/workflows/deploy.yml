@@ -1,0 +1,65 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  REPO_NAME: gh-page
+  REPO_URL: https://github.com/${{ github.repository }}
+
+jobs:
+  deploy:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Nuxt build
+        run: npm run build
+
+      - name: Nuxt generate
+        run: npm run generate
+
+      - name: Checkout GitHub-Page Branch🛎
+        uses: actions/checkout@master
+        with:
+          ref: ${{ env.REPO_NAME }}
+          path: ${{ env.REPO_NAME }}
+          token: ${{secrets.PAT}}
+
+      - name: Copy build files
+        run: cp -fru ./dist/* ./${{ env.REPO_NAME }}
+
+      - name: Get the owner email from last commit
+        run: cd ./${{ env.REPO_NAME }} && echo "USER_EMAIL=$(git log -1 --pretty=format:'%ae')" >> $GITHUB_ENV
+
+      - name: Set git config
+        run: cd ./${{ env.REPO_NAME }} && git config user.email ${{ env.USER_EMAIL }} && git config user.name ${{ github.repository_owner }}
+
+      - name: Commit & Push
+        run: cd ./${{ env.REPO_NAME }} && git add . && git commit -m "${{ github.sha }}" && git push ${{ env.REPO_URL }}
