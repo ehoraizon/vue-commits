@@ -1,6 +1,6 @@
 <template>
   <b-list-group
-    class="max-w-md mx-auto flex md:justify-center align-center min-h-screen drop-shadow-xl"
+    class="max-w-md mx-auto flex sm:justify-center align-center min-h-screen drop-shadow-xl"
   >
     <b-list-group-item
       class="d-flex align-items-center bg-[#710dff] text-white"

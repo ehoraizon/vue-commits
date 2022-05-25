@@ -58,6 +58,9 @@ jobs:
       - name: Copy build files
         run: cp -fr ./dist/* ./${{ env.REPO_NAME }}
 
+      - name: Add .nojekyll file
+        run: touch ./${{ env.REPO_NAME }}/.nojekyll
+
       - name: Get the owner email from last commit
         run: cd ./${{ env.REPO_NAME }} && echo "USER_EMAIL=$(git log -1 --pretty=format:'%ae')" >> $GITHUB_ENV
 
