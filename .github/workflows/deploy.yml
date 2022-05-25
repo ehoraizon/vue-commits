@@ -62,4 +62,4 @@ jobs:
         run: cd ./${{ env.REPO_NAME }} && git config user.email ${{ env.USER_EMAIL }} && git config user.name ${{ github.repository_owner }}
 
       - name: Commit & Push
-        run: cd ./${{ env.REPO_NAME }} && git add . && git commit -m "${{ github.sha }}" && git push ${{ env.REPO_URL }}
+        run: cd ./${{ env.REPO_NAME }} && git rm -rf . && git add . && git commit -m "${{ github.sha }}" && git push ${{ env.REPO_URL }}
