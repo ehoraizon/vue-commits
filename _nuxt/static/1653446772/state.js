@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002Fvue-commits\u002F_nuxt\u002Fstatic\u002F1653446772",layout:"default",error:a,state:{github_commits:{commits:[]}},serverRendered:true,routePath:"\u002F",config:{_app:{basePath:"\u002Fvue-commits\u002F",assetsPath:"\u002Fvue-commits\u002F_nuxt\u002F",cdnURL:a}}}}(null));
