@@ -15,7 +15,7 @@ export type Commit = {
   commiterAvatar: string
   message: string
   verified: boolean
-  html_url: string
+  htmlUrl: string
 }
 
 export const state = () => ({
@@ -44,7 +44,7 @@ export const actions: ActionTree<RootState, RootState> = {
         committerAvatar: val?.committer?.avatar_url ?? '',
         message: val?.commit?.message ?? '',
         verified: val?.verification?.verified ?? false,
-        html_url: val?.html_url ?? '',
+        htmlUrl: val?.html_url ?? '',
       }))
     } catch (e) {
       console.log(e)
